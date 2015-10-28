@@ -7,6 +7,7 @@ class Frontend extends CI_Controller {
 
     function __construct() {
         parent::__construct();
+        $this->load->model('m_frontend');
     }
 
     public function index() {
@@ -46,6 +47,9 @@ class Frontend extends CI_Controller {
 
     public function update(){
         $data['base'] = 'Update';
+
+        $data['updates'] = $this->m_frontend->get_updates();
+        //var_dump($data['updates']);exit;
 
         $data['mainpage'] = 'frontend/update';
         $this->load->view('frontend/templates', $data);
