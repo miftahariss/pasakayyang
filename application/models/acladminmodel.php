@@ -70,9 +70,8 @@ class Acladminmodel extends CI_Model {
     
     public function countMedia($status) {
         $this->db->select('id');
-        $this->db->from($this->table['media']);
+        $this->db->from($this->table['update']);
         $this->db->where('status', $status);
-        $this->db->where('id_channel !=', 0);
 
         $count = $this->db->count_all_results();
 
@@ -238,13 +237,12 @@ class Acladminmodel extends CI_Model {
     }
     
     public function fetchMedia($limit, $start) {
-        $this->db->select('media.*, article_channel.title as channel');
-        $this->db->from($this->table['media']);
-        $this->db->join('article_channel', 'article_channel.id = media.id_channel');
-        $this->db->where('media.status', 1);
+        $this->db->select('*');
+        $this->db->from($this->table['update']);
+        $this->db->where('status', 1);
 
         $this->db->limit($limit, $start);
-        $this->db->order_by('media.id', 'desc');
+        $this->db->order_by('id', 'desc');
         $query = $this->db->get();
 
         return $query->result();
@@ -793,7 +791,7 @@ class Acladminmodel extends CI_Model {
     
     public function updateMedia($data, $id) {
         $this->db->where('id', $id);
-        $this->db->update($this->table['media'], $data);
+        $this->db->update($this->table['update'], $data);
     }
     
     public function updateRatePrint($data, $id) {
@@ -1161,7 +1159,7 @@ class Acladminmodel extends CI_Model {
     
     public function getIdMedia($id) {
         $this->db->where('id', $id);
-        $query = $this->db->get($this->table['media']);
+        $query = $this->db->get($this->table['update']);
 
         return $query->row();
     }
