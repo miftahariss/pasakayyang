@@ -6,10 +6,10 @@
     	<tr>
 	        <a href="<?php echo base_url()?>backend/acladmin/add_media/" class="btn tambah_artikel"><span class="icon-plus-sign"></span> Tambah Update</a>
 	        <?php $attributes = array('class'=>'navbar-form pull-left'); ?>
-	        <?php echo form_open('backend/acladmin/search_media', $attributes); ?>
+	        <?php /* echo form_open('backend/acladmin/search_media', $attributes); ?>
 	            <span class="pull-right"><input type="submit" class="btn btn-primary" name="submit" value="Search" /></span>
 	            <span class="pull-right"><input type="text" class="input-xlarge" name="search" placeholder="Search by title" /></span>
-	        <?php echo form_close(); ?>
+	        <?php echo form_close(); */ ?>
     	</tr>
         <th>ID</th>
         <th>Title</th>
