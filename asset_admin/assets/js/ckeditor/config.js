@@ -10,7 +10,7 @@ CKEDITOR.editorConfig = function( config ) {
 
     config.allowedContent = true;
 
-    var base_url = window.location.origin+"/gom-web";
+    var base_url = window.location.origin+"/pasakayyang";
 //    var base_url = window.location.origin;
 
     config.filebrowserImageBrowseUrl = base_url + '/asset_admin/assets/js/kcfinder/browse.php?type=images';
