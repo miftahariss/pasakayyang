@@ -7,8 +7,8 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Update <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo base_url()?>backend/acladmin/add_media"><span class="icon-plus-sign"></span> Add Media</a></li>
-                        <li><a href="<?php echo base_url()?>backend/acladmin/view_media"><span class="icon-list"></span> View Media</a></li>
+                        <li><a href="<?php echo base_url()?>backend/acladmin/add_media"><span class="icon-plus-sign"></span> Add Update</a></li>
+                        <li><a href="<?php echo base_url()?>backend/acladmin/view_media"><span class="icon-list"></span> View Update</a></li>
                     </ul>
                  </li>
 
