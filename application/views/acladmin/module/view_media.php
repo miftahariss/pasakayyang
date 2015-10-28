@@ -4,7 +4,7 @@
 <table class="table table-hover table-condensed">
     <tbody class="alert alert-info">
     	<tr>
-	        <a href="<?php echo base_url()?>backend/acladmin/add_media/" class="btn tambah_artikel"><span class="icon-plus-sign"></span> Tambah Media</a>
+	        <a href="<?php echo base_url()?>backend/acladmin/add_media/" class="btn tambah_artikel"><span class="icon-plus-sign"></span> Tambah Update</a>
 	        <?php $attributes = array('class'=>'navbar-form pull-left'); ?>
 	        <?php echo form_open('backend/acladmin/search_media', $attributes); ?>
 	            <span class="pull-right"><input type="submit" class="btn btn-primary" name="submit" value="Search" /></span>
@@ -14,7 +14,6 @@
         <th>ID</th>
         <th>Title</th>
         <th>Photo</th>
-        <th>Channel</th>
         <th>Created Date</th>
         <th>Modified Date</th>
         <th>Action</th>
@@ -31,7 +30,6 @@
             		<img class="thumbnail" src="<?php echo base_url()?>asset_admin/assets/uploads/cover/small/<?php echo $r->filename?>" width="70" />
             	<?php endif; ?>
             </td>
-            <td><?php echo $r->channel; ?></td>
             <td><small>
             <?php 
                 if ($r->created_date > date('Y')) {
