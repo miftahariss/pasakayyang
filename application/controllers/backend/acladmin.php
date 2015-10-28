@@ -232,9 +232,6 @@ class Acladmin extends CI_Controller {
             $valid->set_rules('title', 'Judul', 'required');
             $valid->set_rules('short_desc', 'Short Desc', 'required');
             $valid->set_rules('body', 'Isi', 'required');
-            $valid->set_rules('website', 'Website', 'required');
-            $valid->set_rules('meta_keywords', 'Meta Keywords', 'required');
-            $valid->set_rules('meta_description', 'Meta Description', 'required');
             if (isset($_FILES['userfile']['name']) && $_FILES['userfile']['name'] == "") {
                 $valid->set_rules('userfile', 'Foto', 'required');
             }
@@ -289,7 +286,7 @@ class Acladmin extends CI_Controller {
         $data['links'] = $this->pagination->create_links();
         $data['total_rows'] = $config['total_rows'];
         $data['page'] = 'view_media';
-        $data['title'] = 'Media Portolio';
+        $data['title'] = 'Updates';
         $data['content'] = $this->load->view('acladmin/module/view_media', $data, true);
         $this->load->view('acladmin/main', $data);
     }
@@ -300,13 +297,9 @@ class Acladmin extends CI_Controller {
             $permalink = url_title($this->input->post('title'), 'dash', true);
             if ($this->input->post('submit')) {
                 $valid = $this->form_validation;
-                $valid->set_rules('channel', 'Kanal', 'required');
                 $valid->set_rules('title', 'Judul', 'required');
                 $valid->set_rules('short_desc', 'Short Desc', 'required');
                 $valid->set_rules('body', 'Isi', 'required');
-                $valid->set_rules('website', 'Website', 'required');
-                $valid->set_rules('meta_keywords', 'Meta Keywords', 'required');
-                $valid->set_rules('meta_description', 'Meta Description', 'required');
 
                 if ($valid->run() == false) {
                     // show error in view
@@ -318,13 +311,9 @@ class Acladmin extends CI_Controller {
                             'title' => $this->input->post('title'),
                             'short_desc' => $this->input->post('short_desc'),
                             'body' => $this->input->post('body'),
-                            'website' => $this->input->post('website'),
                             'filename' => $format_upload,
-                            'id_channel' => $this->input->post('channel'),
                             //'headline'         => $this->input->post('headline') ? 1 : 0,
                             'permalink' => $permalink,
-                            'meta_keywords' => $this->input->post('meta_keywords'),
-                            'meta_description' => $this->input->post('meta_description'),
                             'modified_date' => time(),
                             'modified_by' => $this->sess_id,
                             'status' => 1
@@ -336,12 +325,8 @@ class Acladmin extends CI_Controller {
                             'title' => $this->input->post('title'),
                             'short_desc' => $this->input->post('short_desc'),
                             'body' => $this->input->post('body'),
-                            'website' => $this->input->post('website'),
-                            'id_channel' => $this->input->post('channel'),
                             //'headline'         => $this->input->post('headline'),
                             'permalink' => $permalink,
-                            'meta_keywords' => $this->input->post('meta_keywords'),
-                            'meta_description' => $this->input->post('meta_description'),
                             'modified_date' => time(),
                             'modified_by' => $this->sess_id,
                             'status' => 1
@@ -356,36 +341,10 @@ class Acladmin extends CI_Controller {
                 }
             }
             $data['page'] = 'edit_media';
-            $data['title'] = 'Edit Media';
+            $data['title'] = 'Edit Update';
             $data['article'] = $this->acladminmodel->getIdMedia($id);
             //$data['photos']  = $this->acladminmodel->getIdGalleryArticle($id);
-
-            $parent = $this->acladminmodel->parentChannel();
-
-            $option = '<select name="channel" required="required"><option value="">-- Pilih Kanal --</option>';
-
-            foreach ($parent as $channel) {
-                if ($data['article']->id_channel == $channel->id)
-                    $select = 'selected';
-                else
-                    $select = '';
-
-                $option .= "<option $select value=$channel->id>$channel->title</option>";
-                $child = $this->acladminmodel->childChannel($channel->id);
-
-                if (count($child) > 0) {
-                    foreach ($child as $chl) {
-                        if ($data['article']->id_channel == $chl->id)
-                            $select = 'selected';
-                        else
-                            $select = '';
-
-                        $option .= "<option $select value=$chl->id>&nbsp;&nbsp;&nbsp;$chl->title</option>";
-                    }
-                }
-            }
-
-            $data['channel'] = $option;
+            
             $data['content'] = $this->load->view('acladmin/module/edit_media', $data, true);
             $this->load->view('acladmin/main', $data);
         } else {
