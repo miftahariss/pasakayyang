@@ -1003,7 +1003,7 @@ class Acladminmodel extends CI_Model {
     
     public function deleteMedia($data, $id) {
         $this->db->where('id', $id);
-        $this->db->update($this->table['media'], $data);
+        $this->db->update($this->table['update'], $data);
     }
     
     public function deleteProject($data, $id) {
