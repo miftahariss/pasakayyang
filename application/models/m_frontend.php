@@ -20,4 +20,17 @@ class M_frontend extends CI_Model{
         }
         return false;
     }
+
+    public function get_detail_updates($permalink){
+        $data = array();
+
+        $this->db->where('status', '1');
+        $this->db->where('permalink', $permalink);
+        $query = $this->db->get('update');
+
+        if ($query->num_rows() > 0) {
+            return $query->result();
+        }
+        return false;
+    }
 }
