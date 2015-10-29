@@ -21,7 +21,14 @@
 
                 <!-- Only Administrator -->
                 <?php if( $this->session->userdata('role') == 1 ): ?>
-
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administrator <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php echo base_url()?>backend/acladmin/add_user"><span class="icon-plus-sign"></span> Add New User</a></li>
+                        <li><a href="<?php echo base_url()?>backend/acladmin/view_user"><span class="icon-list"></span> View User</a></li>
+                        <!--<li><a href="<?php echo base_url()?>backend/acladmin/archive_user"><span class="icon-trash"></span> Archive User</a></li>-->
+                    </ul>
+                </li>
                 <?php endif ?>
                 <!-- Only Administrator -->
 
