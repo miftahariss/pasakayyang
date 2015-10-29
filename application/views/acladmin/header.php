@@ -11,6 +11,13 @@
                         <li><a href="<?php echo base_url()?>backend/acladmin/view_media"><span class="icon-list"></span> View Update</a></li>
                     </ul>
                  </li>
+                 <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Galeri <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php echo base_url()?>backend/acladmin/add_galeri"><span class="icon-plus-sign"></span> Add Galeri</a></li>
+                        <li><a href="<?php echo base_url()?>backend/acladmin/view_galeri"><span class="icon-list"></span> View Galeri</a></li>
+                    </ul>
+                 </li>
 
                 <!-- Only Administrator -->
                 <?php if( $this->session->userdata('role') == 1 ): ?>
