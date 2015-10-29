@@ -17,7 +17,7 @@ Released for free under a Creative Commons Attribution 3.0 Unported License (CC 
 body  {
 	font-family: 'Myriad Set Pro', serif;
 	font-size: 16px;
-	color: #777777;
+	color: #333;
 	text-shadow: 0px 0px, 1px 1px #ffffff;
 }
 a {
@@ -75,12 +75,21 @@ header h1 a {
 	margin:0 auto;
 	padding-top: 30px;
 }
+.box3 {
+	width:280px;
+	float:left;
+	padding:0 23px;
+	text-align:center;
+	min-height:414px;
+}
 .box {
 	width:280px;
 	float:left;
 	padding:0 23px;
 	text-align:center;
 }
+.box2{
+	width:45%; padding:2.5%; float:left; text-align:left}
 .box h2, .sidebar1 h2, .mainContent h2 {
 	padding:20px 0;
 }
@@ -554,7 +563,6 @@ ul#navlist {
 		bottom:5px; 
 		left:25%;
 	}
-}
 img {
 	max-width: 100%;
 	height: auto;
