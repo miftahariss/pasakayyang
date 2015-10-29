@@ -13,6 +13,10 @@ class Frontend extends CI_Controller {
     public function index() {
         $data['base'] = 'Home';
 
+        $data['updates'] = $this->m_frontend->get_updates_home();
+        //var_dump($data['updates']);exit;
+        $data['galeri'] = $this->m_frontend->get_galeri_home();
+
         $data['mainpage'] = 'frontend/home';
         $this->load->view('frontend/templates', $data);
     }
