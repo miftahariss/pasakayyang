@@ -130,7 +130,7 @@ Released for free under a Creative Commons Attribution 3.0 Unported License (CC 
             <li><img src="<?php echo base_url(); ?>asset/images/icon_youtube.jpg"></li>
         </ul>
         <p>
-            Copyright &copy; Festival Bajo Pasakayyang 2015 All Right Reserved 
+            Copyright &copy; Festival Bajo Pasakayyang <?php echo date('Y'); ?> All Right Reserved 
         </p>
   </footer>
 </div>
