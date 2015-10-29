@@ -18,6 +18,7 @@ class Acladminmodel extends CI_Model {
         'profile' => 'profile',
         'contact' => 'contact',
         'update'   => 'update',
+        'galeri' => 'galeri',
         'services'=> 'services',
         'project' => 'project',
         'news_event' => 'news_event',
@@ -71,6 +72,16 @@ class Acladminmodel extends CI_Model {
     public function countMedia($status) {
         $this->db->select('id');
         $this->db->from($this->table['update']);
+        $this->db->where('status', $status);
+
+        $count = $this->db->count_all_results();
+
+        return $count;
+    }
+
+    public function countGaleri($status) {
+        $this->db->select('id');
+        $this->db->from($this->table['galeri']);
         $this->db->where('status', $status);
 
         $count = $this->db->count_all_results();
@@ -239,6 +250,18 @@ class Acladminmodel extends CI_Model {
     public function fetchMedia($limit, $start) {
         $this->db->select('*');
         $this->db->from($this->table['update']);
+        $this->db->where('status', 1);
+
+        $this->db->limit($limit, $start);
+        $this->db->order_by('id', 'desc');
+        $query = $this->db->get();
+
+        return $query->result();
+    }
+
+    public function fetchGaleri($limit, $start) {
+        $this->db->select('*');
+        $this->db->from($this->table['galeri']);
         $this->db->where('status', 1);
 
         $this->db->limit($limit, $start);
@@ -581,6 +604,12 @@ class Acladminmodel extends CI_Model {
 
         return $this->db->insert_id();
     }
+
+    public function addGaleri($data) {
+        $this->db->insert($this->table['galeri'], $data);
+
+        return $this->db->insert_id();
+    }
     
     public function addRatePrint($data) {
         $this->db->insert($this->table['advertising_print'], $data);
@@ -792,6 +821,11 @@ class Acladminmodel extends CI_Model {
     public function updateMedia($data, $id) {
         $this->db->where('id', $id);
         $this->db->update($this->table['update'], $data);
+    }
+
+    public function updateGaleri($data, $id) {
+        $this->db->where('id', $id);
+        $this->db->update($this->table['galeri'], $data);
     }
     
     public function updateRatePrint($data, $id) {
@@ -1005,6 +1039,11 @@ class Acladminmodel extends CI_Model {
         $this->db->where('id', $id);
         $this->db->update($this->table['update'], $data);
     }
+
+    public function deleteGaleri($data, $id) {
+        $this->db->where('id', $id);
+        $this->db->update($this->table['galeri'], $data);
+    }
     
     public function deleteProject($data, $id) {
         $this->db->where('id', $id);
@@ -1160,6 +1199,13 @@ class Acladminmodel extends CI_Model {
     public function getIdMedia($id) {
         $this->db->where('id', $id);
         $query = $this->db->get($this->table['update']);
+
+        return $query->row();
+    }
+
+    public function getIdGaleri($id) {
+        $this->db->where('id', $id);
+        $query = $this->db->get($this->table['galeri']);
 
         return $query->row();
     }
