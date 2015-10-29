@@ -41,6 +41,7 @@ $route['morowali'] = "frontend/morowali";
 $route['sukubajo'] = "frontend/sukubajo";
 $route['festival'] = "frontend/festival";
 $route['galeri'] = "frontend/galeri";
+$route['galeri/(:num)'] = "frontend/galeri";
 $route['update'] = "frontend/update";
 $route['update/(:num)'] = "frontend/update";
 $route['update/(:any)'] = "frontend/detail";
