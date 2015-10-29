@@ -9,7 +9,7 @@
                 <img src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/original/<?php echo $value['filename']; ?>" alt="" width="300px" height="auto"></a>
                 </div>
                 <p>
-                    <?php echo $value['short_desc']; ?>
+                    <?php echo substr($value['short_desc'], 0, 75) . "..."; ?>
                 </p>
             </div>
               <?php endforeach; ?>
