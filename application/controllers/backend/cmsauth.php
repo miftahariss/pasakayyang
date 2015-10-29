@@ -29,7 +29,8 @@ class Cmsauth extends CI_Controller {
             session_start();
             $_SESSION['ses_kcfinder']=array();
             $_SESSION['ses_kcfinder']['disabled'] = false;
-            $_SESSION['ses_kcfinder']['uploadURL'] = URL_EDITOR;
+            // $_SESSION['ses_kcfinder']['uploadURL'] = URL_EDITOR;
+            $_SESSION['ses_kcfinder']['uploadURL'] = DIR_EDITOR;
             $_SESSION['ses_kcfinder']['uploadDir'] = DIR_EDITOR;
 
             redirect('backend/acladmin');
