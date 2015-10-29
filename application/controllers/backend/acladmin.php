@@ -224,6 +224,89 @@ class Acladmin extends CI_Controller {
         return $format_upload;
     }
 
+    private function upload_foto() {
+        $this->load->library('image_lib');
+        $format_upload = '';
+        $rename = url_title(time());
+        if (isset($_FILES['userfile']['name']) && $_FILES['userfile']['name'] != "") {
+
+            $base_path = APPPATH . '../asset_admin/assets/uploads/cover/';
+            chmod($base_path, 0777);
+            $ori_path = $base_path . 'original/';
+
+            $size = array(
+                array('width' => '150', 'height' => '150', 'type' => 'small'),
+                array('width' => '300', 'height' => '300', 'type' => 'medium'),
+                array('width' => '650', 'height' => '650', 'type' => 'large'),
+            );
+
+            //UPLOAD ORG IMAGE
+            $config = array(
+                'upload_path' => $ori_path,
+                'allowed_types' => 'gif|jpg|jpeg|png',
+                'max_size' => '2048'
+            );
+            $this->load->library('upload', $config);
+            $this->upload->do_upload();
+
+            foreach ($size as $value) {
+
+                $image_data = $this->upload->data();
+
+                //RESIZE IMAGE
+                $config_thumb = array(
+                    'image_library' => 'gd2',
+                    'source_image' => $image_data['full_path'],
+                    'new_image' => $base_path . $value["type"],
+                    'create_thumb' => false,
+                    'maintain_ratio' => true,
+                    'width' => $value['width'],
+                    'height' => $value['width']
+                );
+
+                $this->image_lib->initialize($config_thumb);
+                if (!$this->image_lib->resize()) {
+                    echo $this->image_lib->display_errors();
+                }
+
+                //CROPING
+                switch ($value['type']) {
+                    case 'small':
+                        $meta_image['small'] = $base_path . 'small' . '/' . $rename . $image_data['file_ext'];
+                        break;
+                    case 'medium':
+                        $meta_image['medium'] = $base_path . 'medium' . '/' . $rename . $image_data['file_ext'];
+                        break;
+                    case 'large':
+                        $meta_image['large'] = $base_path . 'large' . '/' . $rename . $image_data['file_ext'];
+                        break;
+                }
+
+                $config_crop = array(
+                    'image_library' => 'gd2',
+                    'source_image' => $base_path . $value["type"] . '/' . $image_data['raw_name'] . $image_data['file_ext'],
+                    'new_image' => $base_path . $value["type"] . '/' . $rename . $image_data['file_ext'],
+                    'create_thumb' => false,
+                    'maintain_ratio' => true,
+                );
+
+                $this->image_lib->initialize($config_crop);
+                if (!$this->image_lib->crop()) {
+                    echo $this->image_lib->display_errors();
+                }
+
+                //DELETE RESIZE IMAGE
+                unlink($base_path . $value["type"] . '/' . $image_data['raw_name'] . $image_data['file_ext']);
+                $this->image_lib->clear();
+            }
+
+            rename($image_data['full_path'], $ori_path . $rename . $image_data['file_ext']);
+            $format_upload = $rename . $image_data['file_ext'];
+        }
+
+        return $format_upload;
+    }
+
     public function add_media() {
         $permalink = url_title($this->input->post('title'), 'dash', true);
         if ($this->input->post('submit')) {
@@ -271,6 +354,51 @@ class Acladmin extends CI_Controller {
         $this->load->view('acladmin/main', $data);
     }
 
+    public function add_galeri() {
+        $permalink = url_title($this->input->post('title'), 'dash', true);
+        if ($this->input->post('submit')) {
+            // validation
+            $valid = $this->form_validation;
+            $valid->set_rules('title', 'Judul', 'required');
+            $valid->set_rules('short_desc', 'Short Desc', 'required');
+            if (isset($_FILES['userfile']['name']) && $_FILES['userfile']['name'] == "") {
+                $valid->set_rules('userfile', 'Foto', 'required');
+            }
+
+            if ($valid->run() == false) {
+                // run
+            } else {
+
+                $format_upload = $this->upload_foto();
+                $data = array(
+                    'id_account' => 1,
+                    'title' => $this->input->post('title'),
+                    'short_desc' => $this->input->post('short_desc'),
+                    'filename' => $format_upload,
+                    //'headline'         => $this->input->post('headline') ? 1 : 0,
+                    'permalink' => $permalink,
+                    'created_date' => time(),
+                    'modified_date' => null,
+                    'created_by' => $this->sess_id,
+                    'modified_by' => null,
+                    'status' => 1,
+                );
+
+                $id = $this->acladminmodel->addGaleri($data);
+//                if ($id) {
+//                    $gallery = $this->upload_gallery();
+//                    $this->acladminmodel->addGalleryArticle($gallery, $id);
+//                }
+                redirect('backend/acladmin/view_galeri');
+            }
+        }
+        $data['page'] = 'add_galeri';
+        $data['title'] = 'Tambah Galeri Baru';
+
+        $data['content'] = $this->load->view('acladmin/module/add_galeri', $data, true);
+        $this->load->view('acladmin/main', $data);
+    }
+
     public function view_media() {
         $data['headline'] = $this->input->get('filter') ? $this->input->get('filter') : '1';
         $this->load->library('pagination');
@@ -288,6 +416,26 @@ class Acladmin extends CI_Controller {
         $data['page'] = 'view_media';
         $data['title'] = 'Updates';
         $data['content'] = $this->load->view('acladmin/module/view_media', $data, true);
+        $this->load->view('acladmin/main', $data);
+    }
+
+    public function view_galeri() {
+        $data['headline'] = $this->input->get('filter') ? $this->input->get('filter') : '1';
+        $this->load->library('pagination');
+        $config['base_url'] = site_url('backend/acladmin/view_galeri');
+        $config['per_page'] = $this->limit;
+        $config['total_rows'] = $this->acladminmodel->countGaleri(1);
+        $config['uri_segment'] = 4;
+        $config['first_url'] = $config['base_url'] . '?' . http_build_query($_GET);
+        $this->pagination->initialize($config);
+
+        $page = ($this->uri->segment(4) ? $this->uri->segment(4) : '');
+        $data['media'] = $this->acladminmodel->fetchGaleri($config['per_page'], $page);
+        $data['links'] = $this->pagination->create_links();
+        $data['total_rows'] = $config['total_rows'];
+        $data['page'] = 'view_galeri';
+        $data['title'] = 'Updates';
+        $data['content'] = $this->load->view('acladmin/module/view_galeri', $data, true);
         $this->load->view('acladmin/main', $data);
     }
 
@@ -352,7 +500,63 @@ class Acladmin extends CI_Controller {
         }
     }
 
-    
+    public function edit_galeri() {
+        $id = $this->uri->segment(4);
+        if ($id) {
+            $permalink = url_title($this->input->post('title'), 'dash', true);
+            if ($this->input->post('submit')) {
+                $valid = $this->form_validation;
+                $valid->set_rules('title', 'Judul', 'required');
+                $valid->set_rules('short_desc', 'Short Desc', 'required');
+
+                if ($valid->run() == false) {
+                    // show error in view
+                } else {
+                    $format_upload = $this->upload_foto();
+                    if ($format_upload != "") {
+                        $data = array(
+                            'id' => $id,
+                            'title' => $this->input->post('title'),
+                            'short_desc' => $this->input->post('short_desc'),
+                            'filename' => $format_upload,
+                            //'headline'         => $this->input->post('headline') ? 1 : 0,
+                            'permalink' => $permalink,
+                            'modified_date' => time(),
+                            'modified_by' => $this->sess_id,
+                            'status' => 1
+                        );
+                        $this->acladminmodel->updateGaleri($data, $id);
+                    } else {
+                        $data = array(
+                            'id' => $id,
+                            'title' => $this->input->post('title'),
+                            'short_desc' => $this->input->post('short_desc'),
+                            //'headline'         => $this->input->post('headline'),
+                            'permalink' => $permalink,
+                            'modified_date' => time(),
+                            'modified_by' => $this->sess_id,
+                            'status' => 1
+                        );
+                        $this->acladminmodel->updateGaleri($data, $id);
+                    }
+
+//                    $gallery = $this->upload_gallery();
+//                    $this->acladminmodel->addGalleryArticle($gallery, $id);
+
+                    redirect('backend/acladmin/view_galeri');
+                }
+            }
+            $data['page'] = 'edit_galeri';
+            $data['title'] = 'Edit Galeri';
+            $data['article'] = $this->acladminmodel->getIdGaleri($id);
+            //$data['photos']  = $this->acladminmodel->getIdGalleryArticle($id);
+            
+            $data['content'] = $this->load->view('acladmin/module/edit_galeri', $data, true);
+            $this->load->view('acladmin/main', $data);
+        } else {
+            redirect('backend/acladmin/view_galeri');
+        }
+    }
 
     public function delete_media() {
         if ($this->uri->segment(4)) {
@@ -362,6 +566,17 @@ class Acladmin extends CI_Controller {
             redirect('backend/acladmin/view_media');
         } else {
             redirect('backend/acladmin/view_media');
+        }
+    }
+
+    public function delete_galeri() {
+        if ($this->uri->segment(4)) {
+            $data = array('status' => 0);
+            $id = $this->uri->segment(4);
+            $this->acladminmodel->deleteGaleri($data, $id);
+            redirect('backend/acladmin/view_galeri');
+        } else {
+            redirect('backend/acladmin/view_galeri');
         }
     }
 
