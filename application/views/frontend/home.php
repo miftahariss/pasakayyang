@@ -17,24 +17,32 @@ Sabtu 21 November 2015</h2>
                 <p>
                 	Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 
                 </p>
-                <p><a href="">More detil >></a></p>
+                <p><a href="<?php echo base_url(); ?>morowali">More detil >></a></p>
             </div>
-            <div class="box">
-            	<div><img src="<?php echo base_url(); ?>asset/images/potho2.jpg" alt=""></div>
-                <h2>the printing and typesetting industry</h2>
-                <p>
-                	Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 
-                </p>
-                <p><a href="">More detil >></a></p>
-            </div>
-            <div class="box">
-            	<div><img src="<?php echo base_url(); ?>asset/images/potho3.jpg" alt=""></div>
-                <h2>standard dummy text ever since</h2>
-                <p>
-                	Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 
-                </p>
-                <p><a href="">More detil >></a></p>
-            </div>
+            <?php if(isset($updates)): ?>
+                <?php foreach($updates as $value): ?>
+                    <div class="box">
+                    	<div><img src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/original/<?php echo $value['filename']; ?>" alt=""></div>
+                        <h2><?php echo substr($value['title'], 0, 40) . "..."; ?></h2>
+                        <p>
+                        	<?php echo substr($value['short_desc'], 0, 140) . "..."; ?>
+                        </p>
+                        <p><a href="<?php echo base_url(); ?>update">More detil >></a></p>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <?php if(isset($galeri)): ?>
+                <?php foreach($galeri as $value): ?>
+                    <div class="box">
+                    	<div><img src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/original/<?php echo $value['filename']; ?>" alt=""></div>
+                        <h2><?php echo substr($value['title'], 0, 40) . "..."; ?></h2></h2>
+                        <p>
+                        	<?php echo substr($value['short_desc'], 0, 140) . "..."; ?>
+                        </p>
+                        <p><a href="<?php echo base_url(); ?>galeri">More detil >></a></p>
+                    </div>
+            <?php endforeach; ?>
+            <?php endif; ?>
             <br class="clearfloat" />
         </div>
   </div>

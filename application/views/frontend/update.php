@@ -6,7 +6,7 @@
             <div class="list_art" <?php if ($i % 6 == 0) echo 'style="margin-bottom:30px"'; ?>>
                  <ul>
                     <li class="list_poto"><img src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/original/<?php echo $value['filename']; ?>" alt="" height="180px" width="300px"></li>
-                    <li class="list_judul"><a href="<?php echo base_url(); ?>update/<?php echo $value['permalink']; ?>"><?php echo $value['title']; ?></a></li>
+                    <li class="list_judul"><a href="<?php echo base_url(); ?>update/<?php echo $value['permalink']; ?>"><?php echo substr($value['title'], 0, 65) . "..."; ?></a></li>
                     <li class="list_time">
                       <?php
                       $array_hari = array(1 => "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu");
