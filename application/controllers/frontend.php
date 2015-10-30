@@ -38,6 +38,13 @@ class Frontend extends CI_Controller {
         $this->load->view('frontend/templates', $data);
     }
 
+    public function lokasi(){
+        $data['base'] = 'Lokasi';
+
+        $data['mainpage'] = 'frontend/lokasi';
+        $this->load->view('frontend/templates', $data);
+    }
+
     public function galeri(){
         $data['base'] = 'Galeri';
 
