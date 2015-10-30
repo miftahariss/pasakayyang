@@ -96,9 +96,10 @@ Released for free under a Creative Commons Attribution 3.0 Unported License (CC 
                 <li id="menu2"><a href="<?php echo base_url(); ?>morowali"></a></li>
                 <li id="menu3"><a href="<?php echo base_url(); ?>sukubajo"></a></li>
                 <li id="menu4"><a href="<?php echo base_url(); ?>festival"></a></li>
-                <li id="menu5"><a href="<?php echo base_url(); ?>galeri"></a></li>
-                <li id="menu6"><a href="<?php echo base_url(); ?>update"></a></li>
-                <li id="menu7"><a href="<?php echo base_url(); ?>kontak"></a></li>
+                <li id="menu5"><a href="<?php echo base_url(); ?>lokasi"></a></li>
+                <li id="menu6"><a href="<?php echo base_url(); ?>galeri"></a></li>
+                <li id="menu7"><a href="<?php echo base_url(); ?>update"></a></li>
+                <li id="menu8"><a href="<?php echo base_url(); ?>kontak"></a></li>
         </ul>
         </div>
     </div>
