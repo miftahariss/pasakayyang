@@ -270,25 +270,27 @@ footer p {
 	}
 #button li{ 
 	float:left;
-	height:35px;
+	height:45px;
 	list-style-type:none;
-	margin-top:7px;}
+	margin-top:0px;}
 #button li a{ display:block;text-decoration:none}
-#button li#menu1 a{ background-image:url(../images/menu_01.jpg); width:113px;display:block;text-decoration:none; height:36px; }
-#button li#menu2 a{ background-image:url(../images/menu_02.jpg);width:150px; display:block;text-decoration:none; height:36px;  }
-#button li#menu3 a{ background-image:url(../images/menu_03.jpg); width:143px; display:block;text-decoration:none; height:36px; }
-#button li#menu4 a{ background-image:url(../images/menu_04.jpg); width:194px; display:block;text-decoration:none; height:36px; }
-#button li#menu5 a{ background-image:url(../images/menu_05.jpg);width:123px; display:block ;text-decoration:none; height:36px; }
-#button li#menu6 a{ background-image:url(../images/menu_06.jpg); width:113px; display:block;text-decoration:none; height:36px; }
-#button li#menu7 a{ background-image:url(../images/menu_07.jpg);width:144px; display:block ;text-decoration:none; height:36px; }
+#button li#menu1 a{ background-image:url(../images/menu_01.jpg); width:106px;display:block;text-decoration:none; height:45px; }
+#button li#menu2 a{ background-image:url(../images/menu_02.jpg);width:132px; display:block;text-decoration:none; height:45px;  }
+#button li#menu3 a{ background-image:url(../images/menu_03.jpg); width:128px; display:block;text-decoration:none; height:45px; }
+#button li#menu4 a{ background-image:url(../images/menu_04.jpg); width:183px; display:block;text-decoration:none; height:45px; }
+#button li#menu5 a{ background-image:url(../images/menu_05.jpg);width:103px; display:block ;text-decoration:none; height:45px; }
+#button li#menu6 a{ background-image:url(../images/menu_06.jpg); width:102px; display:block;text-decoration:none; height:45px; }
+#button li#menu7 a{ background-image:url(../images/menu_07.jpg);width:112px; display:block ;text-decoration:none; height:45px; }
+#button li#menu8 a{ background-image:url(../images/menu_08.jpg);width:114px; display:block ;text-decoration:none; height:45px; }
 
-#button li#menu1 a:hover{ background-image:url(../images/menu_01a.jpg); width:113px;display:block;text-decoration:none; height:36px; }
-#button li#menu2 a:hover{ background-image:url(../images/menu_02a.jpg);width:150px; display:block;text-decoration:none; height:36px;  }
-#button li#menu3 a:hover{ background-image:url(../images/menu_03a.jpg); width:143px; display:block;text-decoration:none; height:36px; }
-#button li#menu4 a:hover{ background-image:url(../images/menu_04a.jpg); width:194px; display:block;text-decoration:none; height:36px; }
-#button li#menu5 a:hover{ background-image:url(../images/menu_05a.jpg);width:123px; display:block ;text-decoration:none; height:36px; }
-#button li#menu6 a:hover{ background-image:url(../images/menu_06a.jpg); width:113px; display:block;text-decoration:none; height:36px; }
-#button li#menu7 a:hover{ background-image:url(../images/menu_07a.jpg);width:144px; display:block ;text-decoration:none; height:36px; }
+#button li#menu1 a:hover{ background-image:url(../images/menu_01a.jpg); width:106px;display:block;text-decoration:none; height:45px; }
+#button li#menu2 a:hover{ background-image:url(../images/menu_02a.jpg);width:132px; display:block;text-decoration:none; height:45px;  }
+#button li#menu3 a:hover{ background-image:url(../images/menu_03a.jpg); width:128px; display:block;text-decoration:none; height:45px; }
+#button li#menu4 a:hover{ background-image:url(../images/menu_04a.jpg); width:183px; display:block;text-decoration:none; height:45px; }
+#button li#menu5 a:hover{ background-image:url(../images/menu_05a.jpg);width:103px; display:block ;text-decoration:none; height:45px; }
+#button li#menu6 a:hover{ background-image:url(../images/menu_06a.jpg); width:102px; display:block;text-decoration:none; height:45px; }
+#button li#menu7 a:hover{ background-image:url(../images/menu_07a.jpg);width:112px; display:block ;text-decoration:none; height:45px; }
+#button li#menu8 a:hover{ background-image:url(../images/menu_08a.jpg);width:114px; display:block ;text-decoration:none; height:45px; }
 .sosmed{
 	width:auto;
 	text-align:center;
