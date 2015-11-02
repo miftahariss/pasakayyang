@@ -7,7 +7,6 @@ Released for free under a Creative Commons Attribution 3.0 Unported License (CC 
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Festival Bajo Pasakayyang 2015</title>
 <link href="<?php echo base_url(); ?>asset/css/styles.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="<?php echo base_url(); ?>asset/css/flexslider.css" type="text/css" media="screen" />
