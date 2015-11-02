@@ -5,7 +5,7 @@
               <?php foreach($galeri as $value): ?>
                 <div class="box">
                 <div class="box_photo">
-                <a href="<?php echo base_url() ?>asset_admin/assets/uploads/cover/original/<?php echo $value['filename']; ?>" rel="single"  class="fancybox-effects-a" title="<?php echo $value['title']; ?>" style="margin:0 10px 0 0;">
+                <a href="<?php echo base_url() ?>asset_admin/assets/uploads/cover/original/<?php echo $value['filename']; ?>" rel="single"  class="fancybox-effects-a" title="<?php echo $value['short_desc']; ?>" style="margin:0 10px 0 0;">
                 <img src="<?php echo base_url() ?>asset_admin/assets/uploads/cover/original/<?php echo $value['filename']; ?>" alt="" width="300px" height="auto"></a>
                 </div>
                 <p>
